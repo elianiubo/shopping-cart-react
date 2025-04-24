@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles.css';
-
+import RemoveIcon from '/assets/images/icon-remove-item.svg'
+import EmptyCart from '/assets/images/illustration-empty-cart.svg'
 function ShoppingCart({ data, itemCounts }) {
     const selectedItems = data.filter((item, index) => itemCounts[index] > 0);
     function calculateTotalPrice() {
@@ -18,7 +19,7 @@ function ShoppingCart({ data, itemCounts }) {
             <h2 className='cart-title' >Your Cart ({selectedItems.length})</h2>
             {selectedItems.length === 0 ? (
                 <div className='empty-cart'>
-                    <img src="public\assets\images\illustration-empty-cart.svg" alt="Empty Cart" />
+                    <img src={EmptyCart} alt="Empty Cart" />
                     <p className='cart-p'>You added items will appear here</p>
                 </div>
             ) : (
@@ -26,7 +27,7 @@ function ShoppingCart({ data, itemCounts }) {
                     {selectedItems.map((item, index) => (
                         <div key={index} className='cart-item'>
                             <h3>{item.name}</h3>
-                            <img className='delete-icon' src="public\assets\images\icon-remove-item.svg" alt="Remove Item" />
+                            <img className='delete-icon' src={RemoveIcon} alt="Remove Item" />
                             <div className='elements-cart'>
                                 <p>{itemCounts[index]}x </p>
                                 <p style={{ color: " hsl(7, 20%, 60%)" }}>@{item.price.toFixed(2)} EUR</p>
