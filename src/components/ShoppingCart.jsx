@@ -13,7 +13,7 @@ function ShoppingCart({ data, itemCounts }) {
         });
         return total.toFixed(2);
       }
-
+      
     return (
         <div className=' shopping'>
             <h2 className='cart-title' >Your Cart ({selectedItems.length})</h2>
