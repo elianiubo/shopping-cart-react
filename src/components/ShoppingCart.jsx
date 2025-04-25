@@ -4,16 +4,16 @@ import RemoveIcon from '/assets/images/icon-remove-item.svg'
 import EmptyCart from '/assets/images/illustration-empty-cart.svg'
 
 function ShoppingCart({ data, itemCounts }) {
-    const selectedItems = data.filter((item, index) => itemCounts[index] > 0);
+    const selectedItems = data.filter((index) => itemCounts[index] > 0);
     function calculateTotalPrice() {
         let total = 0;
-        selectedItems.forEach((item, idx) => {
-          // Get original index of this item in `data`
-          const originalIndex = data.findIndex(d => d.name === item.name);
-          total += item.price * itemCounts[originalIndex];
+        selectedItems.forEach((item) => {
+            // Get original index of this item in `data`
+            const originalIndex = data.findIndex(d => d.name === item.name);
+            total += item.price * itemCounts[originalIndex];
         });
         return total.toFixed(2);
-      }
+    }
 
     return (
         <div className=' shopping'>
@@ -25,24 +25,26 @@ function ShoppingCart({ data, itemCounts }) {
                 </div>
             ) : (
                 <div className='cart-items'>
-                    {selectedItems.map((item, index) => (
-                        <div key={index} className='cart-item'>
-                            <h3>{item.name}</h3>
-                            <img className='delete-icon' src={RemoveIcon} alt="Remove Item" />
-                            <div className='elements-cart'>
-                                <p>{itemCounts[index]}x </p>
-                                <p style={{ color: " hsl(7, 20%, 60%)" }}>@{item.price.toFixed(2)} EUR</p>
-                                <p>{item.price * itemCounts[data.findIndex(d => d.name === item.name)].toFixed(2)} EUR</p>
-
+                    {selectedItems.map((item) => {
+                        const originalIndex = data.findIndex(d => d.name === item.name);
+                        const quantity = itemCounts[originalIndex];
+                        const itemTotal = (item.price * quantity).toFixed(2);
+                        return (
+                            <div key={item.name} className='cart-item'>
+                                <h3>{item.name}</h3>
+                                <img className='delete-icon' src={RemoveIcon} alt="Remove Item" />
+                                <div className='elements-cart'>
+                                    <p>{quantity}x</p>
+                                    <p style={{ color: "hsl(7, 20%, 60%)" }}>@{item.price.toFixed(2)} EUR</p>
+                                    <p>{itemTotal} EUR</p>
+                                </div>
                             </div>
-                            
+                        );
+                    })}
+                        <div className='cart-total'>
+                            <p>Order Total: </p>
+                            <p className='total-number'>{calculateTotalPrice()} EUR</p>
                         </div>
-                        
-                    ))}
-                    <div className='cart-total'>
-                        <p>Order Total: </p>
-                        <p className='total-number'>{calculateTotalPrice()} EUR</p>
-                    </div>
                 </div>
             )}
 
