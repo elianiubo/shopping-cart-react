@@ -4,11 +4,11 @@ import RemoveIcon from '/assets/images/icon-remove-item.svg'
 import EmptyCart from '/assets/images/illustration-empty-cart.svg'
 
 function ShoppingCart({ data, itemCounts }) {
-    const selectedItems = data.filter((index) => itemCounts[index] > 0);
+    const selectedItems = data.filter((item, index) => itemCounts[index] > 0);
+
     function calculateTotalPrice() {
         let total = 0;
         selectedItems.forEach((item) => {
-            // Get original index of this item in `data`
             const originalIndex = data.findIndex(d => d.name === item.name);
             total += item.price * itemCounts[originalIndex];
         });
@@ -41,15 +41,12 @@ function ShoppingCart({ data, itemCounts }) {
                             </div>
                         );
                     })}
-                        <div className='cart-total'>
-                            <p>Order Total: </p>
-                            <p className='total-number'>{calculateTotalPrice()} EUR</p>
-                        </div>
+                    <div className='cart-total'>
+                        <p>Order Total: </p>
+                        <p className='total-number'>{calculateTotalPrice()} EUR</p>
+                    </div>
                 </div>
             )}
-
-
-
 
         </div>
     )
