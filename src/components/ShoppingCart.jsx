@@ -48,9 +48,6 @@ function ShoppingCart({ data, itemCounts }) {
                 </div>
             )}
 
-
-
-
         </div>
     )
 
