@@ -16,6 +16,7 @@ function App() {
   function handleDecrement(index) {
       const updated = [...itemCounts];
       if (updated[index] > 0) updated[index]--;
+      
       setItemCounts(updated);
   }
 
@@ -33,6 +34,7 @@ function App() {
       <ShoppingCart 
         data={data}
         itemCounts={itemCounts}
+        setItemCounts={setItemCounts}
       />
 
     </div>

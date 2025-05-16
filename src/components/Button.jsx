@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import '../styles.css';
 
-function Button({ count, onIncrement, onDecrement, buttonText, cartIcon, plusIcon, minusIcon }) {
+function Button({ count, onIncrement, onDecrement, setActiveIndex, buttonText,index, cartIcon, plusIcon, minusIcon }) {
+
 
     if (count === 0) {
         return (
-            <button onClick={onIncrement} className="btn">
+            <button onClick={() => {
+                setActiveIndex(index); // activar borde
+                onIncrement();         // aumentar count
+            }} className="btn">
                 <img src={cartIcon} alt="Cart Icon" className="icon" />
-                <span>{buttonText}</span>
+                <span className='span-button'>{buttonText}</span>
             </button>
         );
     } else {
@@ -18,7 +22,7 @@ function Button({ count, onIncrement, onDecrement, buttonText, cartIcon, plusIco
                 </button>
                 <span className="counter-value">{count}</span>
                 <button onClick={onIncrement} className="counter-btn">
-                    <img src={plusIcon} alt="Plus Icon" className="icon"/>
+                    <img src={plusIcon} alt="Plus Icon" className="icon" />
                 </button>
             </div>
         );
